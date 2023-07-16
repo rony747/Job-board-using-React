@@ -1,16 +1,16 @@
 import{ useJobs} from "@/contexts/JobContext.jsx";
 import Job from "@/components/Job.jsx";
-import {useEffect} from "react";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.jsx";
+import SortBar from "@/components/SortBar.jsx";
 
 function JobLists() {
-    const {jobs, isLoading,filteredJobs} = useJobs()
+    const {jobs, isLoading,filteredJobs,dispatch} = useJobs()
 
     let allJobs = filteredJobs.length > 0 ? filteredJobs :jobs
+
     return (
         <>
-            <div className="job_sortBar flex justify-between mb-3">
-                <div className="total_num"><h3 className={'font-bold text-xl text-gray-600'}>Showing {allJobs.length} Jobs</h3></div>
-            </div>
+           <SortBar allJobs={allJobs} dispatch={dispatch} />
             <div className={'grid gap-4 grid-cols-3'}>
                 {allJobs?.map(job => {
                     return <Job key={job.contact_email} job={job}/>

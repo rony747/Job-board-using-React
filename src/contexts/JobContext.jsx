@@ -6,7 +6,8 @@ const initialState = {
     jobs: [],
     isLoading: true,
     error: '',
-    filteredJobs:[]
+    filteredJobs:[],
+    currentFilter:''
 }
 
 function reducer(state, action) {
@@ -17,10 +18,15 @@ function reducer(state, action) {
             return {...state, isLoading: false, jobs: action.payload}
         case 'rejected':
             return {...state, error: action.payload}
-        case "filter/employment":
-            return {...state, filteredJobs: state.jobs.filter(job => job.employment_type === action.payload)}
-        case "filter/level":
-            return {...state, filteredJobs: state.jobs.filter(job => job.job_level === action.payload)}
+        case "filter":
+            return {...state,currentFilter:action.payload.value, filteredJobs: state.jobs.filter(job => job[action.payload.toFilter] === action.payload.value)}
+        case "sort":
+            return {...state,filteredJobs: action.payload ==='newest' ? (state.jobs.sort((a,b)=>new Date(b.posted_date) - new Date(a.posted_date))) : (state.jobs.sort((a,b)=>new Date(a.posted_date) - new Date(b.posted_date)))
+            }
+
+
+        case 'reset':
+            return {...state, isLoading: false,currentFilter:'', jobs:state.jobs, filteredJobs: []}
 
         default:
             return  state
@@ -29,7 +35,7 @@ function reducer(state, action) {
 
 function JobContextProvider({children}) {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const {jobs,filteredJobs, isLoading, error} = state
+    const {jobs,filteredJobs, isLoading, error,currentFilter} = state
 
     useEffect(function () {
         async function jobsFetch() {
@@ -53,9 +59,26 @@ function JobContextProvider({children}) {
         jobsFetch()
     }, [])
 
+
+    /* get filter items  */
+    const filterReduce = function (type) {
+        return jobs?.reduce((acc, cur) => {
+            if (!acc.includes(cur[type])) {
+                acc.push(cur[type]);
+            }
+            return acc
+        }, [])
+    }
+
+ function getFilterItem(name){
+     return filterReduce(name)
+}
+
+
+
     return (
         <>
-            {<JobContext.Provider value={{jobs,filteredJobs, isLoading, dispatch, error, state}}>
+            {<JobContext.Provider value={{jobs,filteredJobs, currentFilter, isLoading, dispatch, error, state, getFilterItem}}>
                 {children}
             </JobContext.Provider>}
         </>
