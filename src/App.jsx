@@ -4,7 +4,7 @@ import JobsPage from "@/pages/JobsPage.jsx";
 import {JobContextProvider} from "@/contexts/JobContext.jsx";
 import JobLists from "@/components/JobLists.jsx";
 import JobSingle from "@/components/JobSingle.jsx";
-import JobApply from "@/components/JobApply.jsx";
+import ApplyForm from "@/components/ApplyForm.jsx";
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
                             <Route path={'/find-job'} element={<Navigate replace to={'/find-job/all'} /> }/>
                             <Route index path={'/find-job/all'} element={<JobLists/>}/>
                             <Route path={'/find-job/all/:jobId'} element={<JobSingle/>}/>
-                            <Route path={'/find-job/all/:jobId/apply'} element={<JobApply/>}/>
+                            <Route path={'/find-job/all/:jobId/apply'} element={<ApplyForm/>}/>
                         </Route>
                     </Routes>
                 </BrowserRouter>

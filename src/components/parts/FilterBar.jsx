@@ -32,17 +32,17 @@ function FilterBar() {
 
     return (
         <>
-            <div className={'bg-gray-50 border-[1px] border-gray-100 p-2'}>
-                <form action="" className={'flex items-center gap-2'}>
+            <div className={'bg-gray-50 border-[1px] border-gray-100 p-2 '}>
+                <form action="" className={'flex items-center gap-2 bg-white'}>
 
-                    <Select onValueChange={handleChange} >
+                    <Select onValueChange={handleChange}  >
                         <SelectTrigger className="w-[280px]">
                             <SelectValue placeholder="Job Type" />
                         </SelectTrigger>
                         <SelectContent >
                         {byEmployment?.map(job => {
                             return (
-                                <SelectItem key={job} value={job} >{job}</SelectItem>
+                                <SelectItem key={job} value={job}  >{job}</SelectItem>
                             )
                         })}
                         </SelectContent>

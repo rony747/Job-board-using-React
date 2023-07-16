@@ -1,4 +1,5 @@
-import {createContext, useContext, useEffect, useReducer} from "react";
+import {createContext, useContext, useEffect, useReducer, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const JobContext = createContext()
 
@@ -6,8 +7,8 @@ const initialState = {
     jobs: [],
     isLoading: true,
     error: '',
-    filteredJobs:[],
-    currentFilter:''
+    filteredJobs: [],
+    currentFilter: ''
 }
 
 function reducer(state, action) {
@@ -19,24 +20,31 @@ function reducer(state, action) {
         case 'rejected':
             return {...state, error: action.payload}
         case "filter":
-            return {...state,currentFilter:action.payload.value, filteredJobs: state.jobs.filter(job => job[action.payload.toFilter] === action.payload.value)}
+            return {
+                ...state,
+                currentFilter: action.payload.value,
+                filteredJobs: state.jobs.filter(job => job[action.payload.toFilter] === action.payload.value)
+            }
         case "sort":
-            return {...state,filteredJobs: action.payload ==='newest' ? (state.jobs.sort((a,b)=>new Date(b.posted_date) - new Date(a.posted_date))) : (state.jobs.sort((a,b)=>new Date(a.posted_date) - new Date(b.posted_date)))
+            return {
+                ...state,
+                filteredJobs: action.payload === 'newest' ? (state.jobs.sort((a, b) => new Date(b.posted_date) - new Date(a.posted_date))) : (state.jobs.sort((a, b) => new Date(a.posted_date) - new Date(b.posted_date)))
             }
 
 
         case 'reset':
-            return {...state, isLoading: false,currentFilter:'', jobs:state.jobs, filteredJobs: []}
+
+            return {...state, isLoading: false, currentFilter: '', jobs: state.jobs, filteredJobs: []}
 
         default:
-            return  state
+            return state
     }
 }
 
 function JobContextProvider({children}) {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const {jobs,filteredJobs, isLoading, error,currentFilter} = state
-
+    const {jobs, filteredJobs, isLoading, error, currentFilter} = state
+    const [showApply, setShowApply] = useState(false)
     useEffect(function () {
         async function jobsFetch() {
             dispatch({type: 'loading'})
@@ -70,15 +78,15 @@ function JobContextProvider({children}) {
         }, [])
     }
 
- function getFilterItem(name){
-     return filterReduce(name)
-}
-
+    function getFilterItem(name) {
+        return filterReduce(name)
+    }
 
 
     return (
         <>
-            {<JobContext.Provider value={{jobs,filteredJobs, currentFilter, isLoading, dispatch, error, state, getFilterItem}}>
+            {<JobContext.Provider
+                value={{jobs, filteredJobs, currentFilter, isLoading, dispatch, error, state, getFilterItem,showApply,setShowApply}}>
                 {children}
             </JobContext.Provider>}
         </>

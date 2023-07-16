@@ -45,7 +45,7 @@ function Job({job}) {
                             <Link to={`/find-job/all/${job.id}`}>View Details</Link>
                         </Button>
                         <Button asChild className={'text-blue-100 w-1/2  bg-blue-700 hover:text-white'}>
-                            <Link to={`/find-job/all/${job.id}/apply`}>Apply Now</Link>
+                            <Link to={`/find-job/all/${job.id}`} >Apply Now</Link>
                         </Button>
                     </div>
 
