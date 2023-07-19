@@ -15,6 +15,11 @@ function SingleView() {
     const currentJob = jobs.filter(job => {
         return job.id === Number(jobId)
     })
+    const jobApply = applications.filter(apply => {
+        return apply.jobid === jobId
+    })
+
+    let vacancyLeft = currentJob[0].open_position - jobApply.length
 
     return (
         <>
@@ -136,35 +141,29 @@ function SingleView() {
                                                 </p>}
                                         </div>
                                     </div>
-                                    <div className={'mt-4'}>
 
-                                        <h4>Applied By</h4>
-                                            {
 
-                                                applications.map((apply) => {
-                                                    if (apply.jobid !== jobId) return;
+                                    <div className={'mt-4 grid gap-4 grid-cols-2 border-gray-200 border-[1px] items-center rounded-xl'}>
+                                        <div className={'px-5 py-3 border-r-[1px] border-gray-200'}>
 
-                                                    return (
-                                                        <div key={apply.data.phone}>
-                                                            <h3>{apply.data.name}</h3>
-                                                        </div>
+                                                <Button className={'text-blue-100 w-2/4  bg-blue-700 hover:text-white disabled:bg-gray-200 disabled:text-gray-400'}
+                                                       disabled={!showApply && vacancyLeft > 0 ? '' : 'disabled'}
+                                                        onClick={() => {
+                                                            setShowApply(true)
+                                                        }}>
+                                                    Apply Now
+                                                </Button>
+                                        </div>
+                                        <div className={'text-right px-5 py-3'}>
+                                            <h4 className={'font-bold text-gray-500'}><span className={'text-blue-700'}>Vacancy Left:</span> {vacancyLeft}</h4>
+                                        </div>
 
-                                                    )
-                                                })
-                                            }
 
 
                                     </div>
-                                    <div className={'mt-4'}>
-                                        {!showApply &&
-                                            <Button className={'text-blue-100 w-1/4  bg-blue-700 hover:text-white'}
-                                                    onClick={() => {
-                                                        setShowApply(true)
-                                                    }}>
-                                                Apply Now
-                                            </Button>}
-                                        {showApply && <ApplyForm jobid={jobId}/>}
-                                    </div>
+
+                                        {showApply && <div className="mt-4"><ApplyForm jobid={jobId}/> </div>}
+
                                 </CardContent>
 
                             </Card>

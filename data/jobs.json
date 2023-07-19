@@ -21,7 +21,8 @@
     "job_level": "Mid Level",
     "remote_work": false,
     "id": 52,
-    "application": []
+    "application": [],
+    "open_position": 5
   }, {
     "job_title": "VP Marketing",
     "company_name": "Skipstorm",
@@ -44,7 +45,8 @@
     "job_level": "Senior Level",
     "remote_work": true,
     "id": 68,
-    "application": []
+    "application": [],
+    "open_position": 15
   }, {
     "job_title": "Geologist II",
     "company_name": "Kaymbo",
@@ -67,7 +69,8 @@
     "job_level": "Senior Level",
     "remote_work": true,
     "id": 36,
-    "application": []
+    "application": [],
+    "open_position":12
   }, {
     "job_title": "Compensation Analyst",
     "company_name": "Flashpoint",
@@ -90,7 +93,8 @@
     "job_level": "Senior Level",
     "remote_work": false,
     "id": 96,
-    "application": []
+    "application": [],
+    "open_position": 25
   }, {
     "job_title": "Database Administrator II",
     "company_name": "Blogtags",
@@ -113,7 +117,8 @@
     "job_level": "Senior Level",
     "remote_work": false,
     "id": 43,
-    "application": []
+    "application": [],
+    "open_position": 3
   }, {
     "job_title": "Financial Analyst",
     "company_name": "Rhyzio",
@@ -136,7 +141,8 @@
     "job_level": "Senior Level",
     "remote_work": false,
     "id": 24,
-    "application": []
+    "application": [],
+    "open_position": 25
   }, {
     "job_title": "Assistant Manager",
     "company_name": "Eire",
@@ -159,7 +165,8 @@
     "job_level": "Mid Level",
     "remote_work": false,
     "id": 34,
-    "application": []
+    "application": [],
+    "open_position": 5
   }, {
     "job_title": "Librarian",
     "company_name": "Youtags",
@@ -182,7 +189,8 @@
     "job_level": "Mid Level",
     "remote_work": false,
     "id": 67,
-    "application": []
+    "application": [],
+    "open_position": 7
   }, {
     "job_title": "Automation Specialist IV",
     "company_name": "JumpXS",
@@ -205,7 +213,8 @@
     "job_level": "Mid Level",
     "remote_work": false,
     "id": 1,
-    "application": []
+    "application": [],
+    "open_position": 10
   }, {
     "job_title": "Desktop Support Technician",
     "company_name": "Photofeed",
@@ -228,7 +237,8 @@
     "job_level": "Entry Level",
     "remote_work": true,
     "id": 326,
-    "application": []
+    "application": [],
+    "open_position": 8
   }, {
     "job_title": "Quality Engineer",
     "company_name": "Skalith",
@@ -251,7 +261,8 @@
     "job_level": "Mid Level",
     "remote_work": true,
     "id": 45,
-    "application": []
+    "application": [],
+    "open_position": 3
   }, {
     "job_title": "Accounting Assistant IV",
     "company_name": "Kayveo",
@@ -274,6 +285,7 @@
     "job_level": "Entry Level",
     "remote_work": false,
     "id": 22,
-    "application": []
+    "application": [],
+    "open_position": 2
   }]
 }
