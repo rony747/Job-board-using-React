@@ -7,7 +7,7 @@ import ApplyForm from "@/components/ApplyForm.jsx";
 
 function SingleView() {
     const navigate = useNavigate()
-    const {jobs, isLoading, filteredJobs, dispatch, showApply, setShowApply} = useJobs()
+    const {jobs, isLoading, filteredJobs, dispatch, showApply, setShowApply, applications} = useJobs()
 
     let allJobs = filteredJobs.length > 0 ? filteredJobs : jobs
     const {jobId} = useParams()
@@ -137,6 +137,25 @@ function SingleView() {
                                         </div>
                                     </div>
                                     <div className={'mt-4'}>
+
+                                        <h4>Applied By</h4>
+                                            {
+
+                                                applications.map((apply) => {
+                                                    if (apply.jobid !== jobId) return;
+
+                                                    return (
+                                                        <div key={apply.data.phone}>
+                                                            <h3>{apply.data.name}</h3>
+                                                        </div>
+
+                                                    )
+                                                })
+                                            }
+
+
+                                    </div>
+                                    <div className={'mt-4'}>
                                         {!showApply &&
                                             <Button className={'text-blue-100 w-1/4  bg-blue-700 hover:text-white'}
                                                     onClick={() => {
@@ -144,7 +163,7 @@ function SingleView() {
                                                     }}>
                                                 Apply Now
                                             </Button>}
-                                        {showApply && <ApplyForm/>}
+                                        {showApply && <ApplyForm jobid={jobId}/>}
                                     </div>
                                 </CardContent>
 

@@ -8,7 +8,8 @@ const initialState = {
     isLoading: true,
     error: '',
     filteredJobs: [],
-    currentFilter: ''
+    currentFilter: '',
+    applications:[]
 }
 
 function reducer(state, action) {
@@ -31,7 +32,13 @@ function reducer(state, action) {
                 filteredJobs: action.payload === 'newest' ? (state.jobs.sort((a, b) => new Date(b.posted_date) - new Date(a.posted_date))) : (state.jobs.sort((a, b) => new Date(a.posted_date) - new Date(b.posted_date)))
             }
 
-
+        case "apply":
+            console.log(state)
+            return {
+                ...state, applications: [...state.applications,{jobid:action.payload.id, data:{...action.payload.data}}]
+            }
+        
+        
         case 'reset':
 
             return {...state, isLoading: false, currentFilter: '', jobs: state.jobs, filteredJobs: []}
@@ -43,7 +50,7 @@ function reducer(state, action) {
 
 function JobContextProvider({children}) {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const {jobs, filteredJobs, isLoading, error, currentFilter} = state
+    const {jobs, filteredJobs, isLoading, error, currentFilter,applications} = state
     const [showApply, setShowApply] = useState(false)
     useEffect(function () {
         async function jobsFetch() {
@@ -86,7 +93,7 @@ function JobContextProvider({children}) {
     return (
         <>
             {<JobContext.Provider
-                value={{jobs, filteredJobs, currentFilter, isLoading, dispatch, error, state, getFilterItem,showApply,setShowApply}}>
+                value={{jobs, filteredJobs, currentFilter, isLoading, dispatch, error, state, getFilterItem,showApply,setShowApply,applications}}>
                 {children}
             </JobContext.Provider>}
         </>
